@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, {Component} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -24,10 +24,14 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+// import Example from './components/Example';
+import Maps from './components/Maps';
+
 const App: () => React$Node = () => {
   return (
     <>
-      <StatusBar barStyle="dark-content" />
+      <Maps />
+      {/* <StatusBar barStyle="dark-content" />
       <SafeAreaView>
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
@@ -67,7 +71,7 @@ const App: () => React$Node = () => {
             <LearnMoreLinks />
           </View>
         </ScrollView>
-      </SafeAreaView>
+      </SafeAreaView> */}
     </>
   );
 };
