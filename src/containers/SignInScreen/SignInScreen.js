@@ -1,29 +1,14 @@
 import React from 'react';
-import auth from '@react-native-firebase/auth';
-import {GoogleSignin} from '@react-native-community/google-signin';
+import {useDispatch} from 'react-redux';
 import {View, Button, StyleSheet} from 'react-native';
 
+import {signIn} from '../../actions/auth';
+
 const SignInScreen = () => {
-  async function onGoogleButtonPress() {
-    // Get the users ID token
-    const {idToken} = await GoogleSignin.signIn();
-
-    // Create a Google credential with the token
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-
-    // Sign-in the user with the credential
-    return auth().signInWithCredential(googleCredential);
-  }
+  const dispatch = useDispatch();
   return (
     <View style={styles.container}>
-      <Button
-        title="Sign In"
-        onPress={() =>
-          onGoogleButtonPress().then(() =>
-            console.log('Signed in with Google!'),
-          )
-        }
-      />
+      <Button title="Sign In" onPress={() => dispatch(signIn())} />
     </View>
   );
 };

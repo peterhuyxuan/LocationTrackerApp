@@ -9,7 +9,6 @@
 import React, {useState, useEffect} from 'react';
 import auth from '@react-native-firebase/auth';
 
-import MainNavigator from './containers/MainNavigator/MainNavigator';
 import HomeScreen from './containers/HomeScreen/HomeScreen';
 import SignInScreen from './containers/SignInScreen/SignInScreen';
 

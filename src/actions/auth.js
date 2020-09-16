@@ -1,26 +1,38 @@
-// import {
-//     AUTH_RESTORE_TOKEN,
-//     AUTH_SIGN_IN,
-//     AUTH_SIGN_OUT
-// } from '../constants/auth';
+import auth from '@react-native-firebase/auth';
+import {GoogleSignin} from '@react-native-community/google-signin';
 
-// export const signIn = (uid) => ({
-//   type: AUTH_SIGN_IN,
-//   uid,
-// });
+import {AUTH_SIGN_IN, AUTH_SIGN_OUT} from '../constants/auth';
 
-// export const startSignIn = () => {
-//   return () => {
-//     return firebase.auth().signInWithPopup(googleAuthProvider);
-//   };
-// };
+export const signIn = () => {
+  return async (dispatch) => {
+    // Get the users ID token
+    const userInfo = await GoogleSignin.signIn();
 
-// export const signOut = () => ({
-//   type: AUTH_SIGN_OUT,
-// });
+    // Create a Google credential with the token
+    const googleCredential = auth.GoogleAuthProvider.credential(
+      userInfo.idToken,
+    );
 
-// export const startSignOut = () => {
-//   return () => {
-//     return firebase.auth().signOut();
-//   };
-// };
+    // Sign-in the user with the credential
+    auth()
+      .signInWithCredential(googleCredential)
+      .then(() =>
+        dispatch({
+          type: AUTH_SIGN_IN,
+          user: userInfo,
+        }),
+      );
+  };
+};
+
+export const signOut = () => {
+  return (dispatch) => {
+    auth()
+      .signOut()
+      .finally(() =>
+        dispatch({
+          type: AUTH_SIGN_OUT,
+        }),
+      );
+  };
+};

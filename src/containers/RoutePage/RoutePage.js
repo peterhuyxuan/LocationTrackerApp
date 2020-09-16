@@ -1,8 +1,9 @@
 import React from 'react';
-import {Text} from 'react-native-paper';
+
+import Maps from '../../components/Maps';
 
 const RoutePage = () => {
-  return <Text>Route</Text>;
+  return <Maps />;
 };
 
 export default RoutePage;
